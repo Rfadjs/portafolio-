@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Portafolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Tu CSS original -->
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    header {
+      background: #000;
+      box-shadow: 0 2px 4px rgba(255,0,0,0.2);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+    nav { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+    .logo { font-size: 1.5rem; font-weight: 600; color: #e63946; }
+    .nav-links { display: flex; }
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #e63946; }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #000 url('imagenes/hero-bg.jpg') center/cover no-repeat;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; color: #fff; }
+    .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; color: #ddd; }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: #e63946;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .btn:hover { background: #c62828; }
+
+    section { padding: 80px 0; }
+    .about, .skills, .projects {
+      background: #111;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      margin-bottom: 40px;
+    }
+    .about .content, .skills .content, .projects .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+    .about .content img {
+      width: 100%;
+      max-width: 260px;
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    .skills ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+    .skills li {
+      background: #e63946;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      margin: 5px;
+      font-size: 0.9rem;
+    }
+
+    .projects .card {
+      background: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 460px;
+    }
+    .projects .card:hover { transform: translateY(-5px); }
+    .projects .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-content {
+      padding: 15px;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card-content a.btn-project { margin-top: auto; }
+    .card-content h3 { margin-bottom: 10px; font-size: 1.2rem; color: #e63946; }
+    .card-content p { color: #ddd; font-size: 0.95rem; }
+
+    .btn-project {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #e63946;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .btn-project:hover { background: #c62828; }
+
+    .contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .contact input, .contact textarea {
+      padding: 0.75rem;
+      margin-bottom: 15px;
+      border: 1px solid #444;
+      border-radius: 5px;
+      background: #111;
+      color: #fff;
+      font-family: inherit;
+    }
+    .contact button {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      background: #e63946;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact button:hover { background: #c62828; }
+
+    #contact-message {
+      display: none;
+      margin-top: 20px;
+      color: #e63946;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1rem; }
+      .nav-links { display: none; }
+      .menu-toggle { display: block; cursor: pointer; font-size: 1.5rem; }
+    }
+  </style>
+
+  <!-- Override específico con !important -->
+  <style>
+    .about .content img.profile-img {
+      width: 260px !important;
+      height: 260px !important;
+      object-fit: cover !important;
+      border-radius: 50% !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
+      display: block !important;
+      margin: 0 auto !important;
+      transition: transform 0.3s !important;
+    }
+    .about .content img.profile-img:hover {
+      transform: scale(1.05) !important;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Mi Portafolio</div>
+        <div class="menu-toggle">☰</div>
+        <div class="nav-links">
+          <a href="#about">Sobre mí</a>
+          <a href="#skills">Habilidades</a>
+          <a href="#projects">Proyectos</a>
+          <a href="#contact">Contacto</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Hola, soy Francisco Valdivia</h1>
+      <p>Soy estudiante de Analista Programador en el Instituto Santo Tomás de Ovalle, enfocado en el desarrollo de soluciones web y aplicaciones que faciliten el día a día.</p>
+      <a href="#contact" class="btn">Contáctame</a>
+    </div>
+  </section>
+
+  <section id="about" class="about container">
+    <div class="content">
+      <img src="assets/img/mifoto.png" alt="Foto de perfil" class="profile-img">
+      <div>
+        <h2>Sobre mí</h2>
+        <p>Apasionado por la programación, diseño y creación de aplicaciones útiles con tecnologías modernas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="skills container">
+    <h2>Habilidades</h2>
+    <ul class="content">
+      <li>Node.js</li>
+      <li>SQL</li>
+      <li>JavaScript</li>
+      <li>Python</li>
+    </ul>
+  </section>
+
+  <section id="projects" class="projects container">
+    <h2>Proyectos Destacados</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="assets/img/teacup.jpg" alt="VerdeVital">
+        <div class="card-content">
+          <h3>VerdeVital</h3>
+          <p>VerdeVital es una tienda online de productos naturales y sostenibles, que ofrece un catálogo interactivo con filtros, un carrito de compras dinámico y notificaciones en tiempo real vía Telegram para hacer el seguimiento de tus pedidos fácil e inmediato.</p>
+          <a href="https://github.com/Rfadjs/verdevital" target="_blank" class="btn-project">Ver repositorio</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="assets/img/wazitocorp.jpg" alt="SOFT_wazitocorp_FA">
+        <div class="card-content">
+          <h3>SOFT_wazitocorp_FA</h3>
+          <p>Aplicación de escritorio Java Swing para inicio de sesión con validación de usuario y contraseña.</p>
+          <a href="https://github.com/Rfadjs/SOFT_wazitocorp_FA" target="_blank" class="btn-project">Ver repositorio</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="assets/img/ShowChed.png" alt="ShowSched App">
+        <div class="card-content">
+          <h3>ShowSched</h3>
+          <p>Aplicación móvil desarrollada en Java para la gestión de shows y eventos musicales. Incluye login de usuario y una interfaz moderna.<br><strong>Tecnologías:</strong> Java, Android Studio</p>
+          <a href="https://github.com/Rfadjs/ShowSched" target="_blank" class="btn-project">Ver repositorio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact container">
+    <h2>Contacto</h2>
+    <form>
+      <input type="text" placeholder="Tu nombre" required>
+      <input type="email" placeholder="Tu correo" required>
+      <textarea rows="5" placeholder="Tu mensaje" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    <div id="contact-message"></div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Francisco Valdivia. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuToggle.addEventListener('click', () => {
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    const contactForm = document.querySelector('.contact form');
+    const contactMessage = document.getElementById('contact-message');
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      contactMessage.textContent = "¡Mensaje enviado correctamente!";
+      contactMessage.style.display = "block";
+      contactForm.reset();
+      setTimeout(() => {
+        contactMessage.style.display = "none";
+      }, 4000);
+    });
+  </script>
+</body>
+</html>
