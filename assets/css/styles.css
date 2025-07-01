@@ -1,4 +1,3 @@
-/* Reset y base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -36,6 +35,12 @@ nav {
   font-weight: 600;
   color: #e63946;
 }
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #fff;
+}
 .nav-links {
   display: flex;
 }
@@ -44,10 +49,20 @@ nav {
   text-decoration: none;
   color: #fff;
   font-weight: 600;
-  transition: color 0.3s;
+  transition: color 0.3s, background 0.3s;
 }
 .nav-links a:hover {
   color: #e63946;
+}
+/* Botón descarga CV */
+.nav-links a.download {
+  background: #e63946;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+.nav-links a.download:hover {
+  background: #c62828;
 }
 
 /* Hero */
@@ -56,14 +71,13 @@ nav {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: #000 url('imagenes/hero-bg.jpg') center/cover no-repeat;
+  background: #000 url('assets/img/hero-bg.jpg') center/cover no-repeat;
   text-align: center;
   padding: 0 20px;
 }
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  color: #fff;
 }
 .hero p {
   font-size: 1.2rem;
@@ -77,15 +91,14 @@ nav {
   background: #e63946;
   color: #fff;
   border-radius: 5px;
-  text-decoration: none;
   font-weight: 600;
-  transition: background 0.3s;
+  text-decoration: none;
 }
 .btn:hover {
   background: #c62828;
 }
 
-/* Secciones generales */
+/* Secciones */
 section {
   padding: 80px 0;
 }
@@ -96,7 +109,7 @@ section {
   margin-bottom: 40px;
 }
 
-/* — Sobre mí: layout fijo de 2 columnas — */
+/* Sobre mí */
 .about .content {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -104,25 +117,13 @@ section {
   gap: 2rem;
   padding: 2rem;
 }
-/* Adaptación móvil */
-@media (max-width: 768px) {
-  .about .content {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-}
-
-/* Imagen de perfil */
 .about .content img.profile-img {
   width: 260px;
   height: 260px;
   object-fit: cover;
-  /* Mueve el punto focal 50% horizontal y 20% vertical */
   object-position: 50% 20%;
   border-radius: 50%;
   box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  display: block;
-  margin: 0 auto;
   transition: transform 0.3s;
 }
 .about .content img.profile-img:hover {
@@ -137,14 +138,12 @@ section {
 }
 .skills li {
   background: #e63946;
-  color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-  margin: 5px;
   font-size: 0.9rem;
 }
 
-/* Proyectos: tarjetas simétricas */
+/* Proyectos */
 .projects .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
@@ -155,11 +154,9 @@ section {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  transition: transform 0.3s;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  min-height: 460px;
+  transition: transform 0.3s;
 }
 .projects .card:hover {
   transform: translateY(-5px);
@@ -176,24 +173,11 @@ section {
   flex-direction: column;
   justify-content: space-between;
 }
-.card-content h3 {
-  color: #e63946;
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-}
-.card-content p {
-  color: #ddd;
-  font-size: 0.95rem;
-}
 .btn-project {
-  display: inline-block;
-  padding: 0.5rem 1rem;
   background: #e63946;
-  color: #fff;
+  padding: 0.5rem 1rem;
   border-radius: 5px;
   font-weight: 600;
-  text-decoration: none;
-  transition: background 0.3s;
 }
 .btn-project:hover {
   background: #c62828;
@@ -220,7 +204,6 @@ section {
   background: #e63946;
   border: none;
   border-radius: 5px;
-  color: #fff;
   font-weight: 600;
   cursor: pointer;
 }
@@ -230,56 +213,43 @@ section {
 #contact-message {
   display: none;
   margin-top: 20px;
-  text-align: center;
   color: #e63946;
+  text-align: center;
   font-weight: bold;
 }
 
 /* Footer */
 footer {
   background: #000;
-  color: #fff;
-  text-align: center;
   padding: 20px 0;
+  text-align: center;
 }
 
-/* Responsive nav */
+/* Responsive */
 @media (max-width: 768px) {
-  /* Ajustes de tipografía en móvil */
   .hero h1 {
     font-size: 2.5rem;
   }
   .hero p {
     font-size: 1rem;
   }
-
-  /* Oculta nav-links por defecto y prepara el dropdown */
   .nav-links {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 0;
+    top: 60px;
     right: 0;
     width: 100%;
-    height: 100vh;
     background: #000;
-    z-index: 1000;
+    padding: 10px 0;
+    z-index: 99;
   }
-
-  /* Espaciado vertical entre enlaces */
   .nav-links a {
     margin: 10px 20px;
   }
-
-  /* Muestra el botón de menú */
   .menu-toggle {
     display: block;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: #fff;
   }
-
-  /* Cuando tenga la clase .show, muéstralo centrado */
   .nav-links.show {
     display: flex;
     justify-content: center;
